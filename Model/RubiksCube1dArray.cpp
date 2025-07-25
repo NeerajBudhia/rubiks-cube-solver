@@ -1,5 +1,6 @@
 //
 // Created by Lakshya Mittal on 22-12-2021.
+// Modified by Pranav Harresh on 25-07-2025.
 //
 
 #include "RubiksCube.h"
@@ -56,6 +57,10 @@ public:
             default:
                 return COLOR::WHITE;
         }
+    }
+
+    void setColor(FACE face, int row, int col, COLOR color) override {
+        cube[getIndex((int)face, (int)row, (int)col)] = getColorLetter(color);
     }
 
     bool isSolved() const override {

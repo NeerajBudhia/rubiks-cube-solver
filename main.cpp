@@ -1,5 +1,6 @@
 //
 // Created by Lakshya Mittal on 17-12-2021.
+// Modified by Pranav Harresh on 25-07-2025.
 //
 
 #include <bits/stdc++.h>
@@ -12,6 +13,7 @@
 #include "Solver/IDAstarSolver.h"
 //#include "PatternDatabases/CornerPatternDatabase.h"
 #include "PatternDatabases/CornerDBMaker.h"
+#include "Scanner/CubeScanner.h"
 
 using namespace std;
 
@@ -265,25 +267,41 @@ int main() {
 
 
 // CornerDBMaker Testing --------------------------------------------------------------------------
-    string fileName = "C:\\Users\\user\\CLionProjects\\rubiks-cube-solver\\Databases\\cornerDepth5V1.txt";
 
+//    string fileName = "C:\\Users\\user\\CLionProjects\\rubiks-cube-solver\\Databases\\cornerDepth5V1.txt";
+//
 //    Code to create Corner Database
 //    CornerDBMaker dbMaker(fileName, 0x99);
 //    dbMaker.bfsAndStore();
+//
+//    RubiksCubeBitboard cube;
+//    auto shuffleMoves = cube.randomShuffleCube(13);
+//    cube.print();
+//    for (auto move: shuffleMoves) cout << cube.getMove(move) << " ";
+//    cout << "\n";
+//
+//    IDAstarSolver<RubiksCubeBitboard, HashBitboard> idaStarSolver(cube, fileName);
+//    auto moves = idaStarSolver.solve();
+//
+//    idaStarSolver.rubiksCube.print();
+//    for (auto move: moves) cout << cube.getMove(move) << " ";
+//    cout << "\n";
 
+// CubeScanner Testing ----------------------------------------------------------------------------------
+
+    string fileName = "C:\\Users\\Pranav\\CLionProjects\\rubiks-cube-solver\\Databases\\cornerDepth5V1.txt";
+
+    CubeScanner scanner(0);
     RubiksCubeBitboard cube;
-    auto shuffleMoves = cube.randomShuffleCube(13);
+    scanner.scan(cube);
     cube.print();
-    for (auto move: shuffleMoves) cout << cube.getMove(move) << " ";
+
+    IDAstarSolver<RubiksCubeBitboard, HashBitboard> idAstarSolver(cube, fileName);
+    auto solve_moves = idAstarSolver.solve();
+
+    for (auto move: solve_moves) cout << cube.getMove(move) << " ";
     cout << "\n";
-
-    IDAstarSolver<RubiksCubeBitboard, HashBitboard> idaStarSolver(cube, fileName);
-    auto moves = idaStarSolver.solve();
-
-    idaStarSolver.rubiksCube.print();
-    for (auto move: moves) cout << cube.getMove(move) << " ";
-    cout << "\n";
-
+    idAstarSolver.rubiksCube.print();
 
     return 0;
 }
